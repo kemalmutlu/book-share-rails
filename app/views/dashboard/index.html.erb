@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-secondary d-flex" role="alert">
+        <div class="content mr-auto my-auto">
+          Listing <b><%= current_user.username %></b> Books
+        </div>
+        <div class="helper-menu">
+          <%= link_to 'Crate a new book', new_book_path, :class => 'btn btn-primary btn-sm ' %>
+          <%= link_to 'Back', root_path, :class => 'btn btn-warning btn-sm' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-6">
+      <% if @books.any? %>
+        <div class="row">
+          <%= render 'dashboard/books' %>
+        </div>
+      <% else %>
+        <div class="alert alert-info" role="alert">
+          You have no books.
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-6 mt-2">
+      <h3>Your comments.</h3>
+      <%= render 'dashboard/user_comments' %>
+      <hr>
+      <h3>Here are the book comments that added by other users.</h3>
+      <%= render 'dashboard/comments' %>
+      <hr>
+      <h3>Your Offers</h3>
+      <%= render 'dashboard/user_offers' %>
+      <hr>
+      <h3>Incoming Offer</h3>
+      <%= render 'dashboard/incoming_offers' %>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          Your book is <b><%= @offer.book.title %></b>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><%= @offer.recomemded_book.user.username %> sent an offer.</h5>
+          <p class="card-text">
+            Suggests <a href="<%=book_path(@book.id)%>"><%= @book.title %></a> book.
+          </p>
+          <% if @offer.status == 'waiting' %>
+            <span class="badge badge-danger">Unapproved</span>
+             <%= render 'form' %>
+          <% else %>
+            <span class="badge badge-<%= @offer.status == 1 ? 'success' : 'danger' %>"><%= @offer.status %></span>
+          <% end %>
+        </div>
+      </div>        
+    </div>
+  </div>
+</div>

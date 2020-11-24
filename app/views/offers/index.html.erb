@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Bidder</th>
+            <th scope="col">Recommended Book</th>
+            <th scope="col">Desired Book</th>
+            <th scope="col">Order Date</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @offers.each_with_index do |offer, index| %>
+            <tr>
+              <th scope="row"><%=index%></th>
+              <td>
+                <%= link_to offer.recomemded_book.user.username, user_path(offer.recomemded_book.user), :style => 'color: black'%>
+              </td>
+              <td>
+                <%= link_to offer.book.title, book_path(offer.book), :style => 'color: black' %>
+              </td>
+              <td>
+                <%= link_to offer.recomemded_book.title, book_path(offer.recomemded_book), :style => 'color: black' %>
+              </td>
+              <td>
+                <%=verbose_date(offer.created_at)%>
+              </td>
+              <td>
+                <% if offer.waiting? %>
+                    <span class="badge badge-primary badge-pill"><%=offer.status%></span>
+                  <% elsif offer.approved? %>
+                    <span class="badge badge-success badge-pill"><%=offer.status%></span>
+                  <% elsif offer.rejected? %>
+                    <span class="badge badge-danger badge-pill"><%=offer.status%></span>
+                  <% end %>
+              </td>
+            </tr>
+          <% end %>
+        
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

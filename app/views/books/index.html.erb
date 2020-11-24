@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-12">
+      <div class="jumbotron">
+        <h1 class="display-4">Hello, <%= current_user.present? ? current_user.username : 'guest!' %></h1>
+          <p class="lead">You have <%= current_user.books.count %> books.</p>
+          <hr class="my-4">
+          <a href="<%=new_book_path%>" class="btn btn-success">Create a book</a>    
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="alert alert-secondary d-flex" role="alert">
+        <div class="content mr-auto my-auto">
+          Listing <b><%= current_user.username %></b> Books
+        </div>
+        <div class="helper-menu">
+          <%= link_to 'Crate a new book', new_book_path, :class => 'btn btn-primary btn-sm ' %>
+          <%= link_to 'Back', root_path, :class => 'btn btn-warning btn-sm' %>
+        </div>
+      </div>
+    </div>
+    <% @books.each do |book| %>
+        <div class="col-6 col-sm-6 col-md-3 mt-3">
+          <div class="card" style="width: 100%;">
+              <div class="card-header">
+                <span class="badge badge-pill badge-success"><%= book.user.username %></span>
+                <span class="badge badge-pill badge-info">Page Count: <%= book.pagecount %></span>  
+              </div>
+              <div class="card-body">
+                <h5 class="card-title"><%= book.title %></h5>
+                <footer class="blockquote-footer">Written by <cite title="Source Title"><%= book.author.split(' ').map(&:capitalize).join(" ") %></cite></footer>
+                <%= link_to 'Show', book_path(book), :class => 'btn btn-primary btn-sm float-right mt-1' %>
+              </div>
+          </div>
+        </div>
+      <% end %>
+  </div>
+</div>

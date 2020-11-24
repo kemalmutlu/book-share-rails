@@ -1,0 +1,14 @@
+ <% if current_user.comments.any? %>
+  <% current_user.comments.each do |comment| %>
+    <div class="alert alert-<%= comment.status == false ? 'info' : 'success' %>" role="alert">
+      You wrote a comment <strong><a href="<%=book_path(comment.book.id)%>"><%= comment.book.title %></a></strong> book. 
+        <span class="badge badge-pill badge-info float-right">
+          <%= comment.status ? 'Approved comment' : 'Waiting for approval' %>
+        </span>
+    </div>
+  <% end %>
+<% else %>
+  <div class="alert alert-info" role="alert">
+    You have no comment.
+  </div>
+<% end %>

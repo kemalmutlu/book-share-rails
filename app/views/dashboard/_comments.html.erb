@@ -1,0 +1,14 @@
+<% if @users_books_reviews.size > 0 %>
+  <% @users_books_reviews.each do |comment| %>
+    <div class="alert alert-<%= comment.status == false ? 'info' : 'success' %>" role="alert">
+      <%= comment.user.username %> wrote a comment your <%= comment.book.title %> book. 
+      <% if comment.status == false %>
+        <%= link_to 'Click here', edit_book_comment_path(comment.book.id, comment)%> to accept it.
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
+    <div class="alert alert-info" role="alert">
+    There is no comment for your books :(.
+  </div>
+<% end %>

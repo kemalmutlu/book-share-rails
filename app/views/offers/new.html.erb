@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+     <div class="card bg-light mb-3">
+        <div class="card-header">
+          The book named <strong><%= @book_to_offer.title %></strong> was shared by person
+          <strong><%= @book_to_offer.user.username %></strong>.
+        </div>
+        <div class="card-body">
+          <% if @user_tradable_books.size > 0 %>
+            <h5 class="card-title">Which book would you recommend?</h5>
+            <div class="form-group">
+              <%= form_with(model: [ @book_to_offer, @book_to_offer.offers.build ], local: true) do |form| %>
+                <%= form.select(:recommended_book_id, @user_tradable_books, {},{:class => 'form-control'}) %>
+                <%= form.submit "Send", :class => 'btn btn-info btn-sm mt-3' %>
+              <% end %>
+            </div>
+          <% else %>
+            <div class="alert alert-info" role="alert">
+              You have no tradable books. Check your <a href="<%= dashboard_index_path %>">dashboard.</a>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

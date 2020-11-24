@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card text-center mb-3">
+        <div class="card-header">
+          <strong><h3 class="d-inline"><%= @book.title %></h3></strong>
+          <a href="<%=user_path(@book.user.id)%>">
+            <span class="badge badge-pill badge-success float-right">
+              <%= @book.user.username %>
+            </span>
+          </a>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Author: <%= @book.author.split(' ').map(&:capitalize).join(" ") %></h5>
+          <p class="card-text h5">Page Count: <%= @book.pagecount %></p>
+          <p class="card-text h5">Tradable: <%= @book.tradable %></p>
+          <% if current_user.id != @book.user.id %>
+              <a href="<%= new_book_offer_path(@book.id)%>" class="btn btn-primary <%= @offer ? 'disabled' : '' %>">
+                Create Offer
+              </a>  
+            <% if @offer && @offer.waiting? %>
+              <div class="alert alert-info mt-3">
+                <% if @offer.recomemded_book.id == @book.id %>
+                  <strong><%= @offer.recomemded_book.title %></strong> was offered to 
+                    <strong><%= @offer.book.title %></strong>.
+                     [<strong><%= @offer.recomemded_book.user.username %></strong>]
+                <% else %>
+                  <strong><%= @offer.recomemded_book.title %></strong> was offered for this book. 
+                  [<strong><%= @offer.recomemded_book.user.username %></strong>]
+                <% end %>
+              </div>
+            <% end %>
+          <% else %>
+            <%= link_to 'Edit', edit_book_path(@book), :class => 'btn btn-info' %>
+          <% end %>
+        </div>
+        <div class="card-footer text-muted">
+          Upload Date <%= @book.created_at.strftime("%d/%m/%Y") %>
+        </div>
+      </div>
+      
+      <div class="card" style="width: 100%;">
+        <div class="card-body">
+          <h2>Comments</h2>
+            <%= render @book.comments.approved %>
+            <%= render @book.comments.waiting_for_approval(current_user.id) %>
+          <div class="comments"></div>
+
+          <div class="d-none" id="info"></div>
+          <hr>
+          <h2>Add a comment:</h2>
+            <%= render 'comments/form' %>
+
+          <%= link_to 'Back', books_path, :class => 'btn btn-warning' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-3">
+        <div class="row no-gutters">
+          <div class="col-md-12">
+            <div class="card-body">
+              <h5 class="card-title"><%= @user.username  %></h5>
+              <p class="card-text"><%= @user.email  %></p>
+              <p class="card-text"><small class="text-muted">Registered at <%= @user.created_at.strftime("%d/%m/%Y %H:%M:%S")%></small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 text-center">
+      <h2>Users' books</h2>
+    </div>
+
+    <% if @books.any? %>
+      <% @books.can_be_listed.each do |book| %>
+        <div class="col-6 col-sm-6 col-md-3 mt-3">
+          <div class="card" style="width: 100%;">
+              <div class="card-header">
+                <span class="badge badge-pill badge-info">Page Count: <%= book.pagecount %></span>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title"><%= book.title %></h5>
+                <footer class="blockquote-footer">
+                  Written by <cite title="Source Title"><%= book.author.split(' ').map(&:capitalize).join(" ") %></cite>
+                </footer>
+                <%= link_to 'Show', book_path(book), :class => 'btn btn-primary btn-sm float-right mt-1' %>
+              </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+    <div class="col-12 text-center mt-1">
+      <div class="alert alert-primary" role="alert">
+        There is no book.
+      </div>
+    </div>
+    <% end %>
+
+  </div>
+</div>
