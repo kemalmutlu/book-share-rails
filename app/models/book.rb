@@ -1,6 +1,6 @@
 class Book < ApplicationRecord
-  validates :title, presence: true
-  validates :author, presence: true
+  validates :title, :author, presence: true
+  validates :pagecount, :numericality => { :greater_than => 0 }
 
   belongs_to :user
   has_many :comments, dependent: :destroy
