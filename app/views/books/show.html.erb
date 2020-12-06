@@ -14,26 +14,24 @@
           <h5 class="card-title">Author: <%= @book.author.split(' ').map(&:capitalize).join(" ") %></h5>
           <p class="card-text h5">Page Count: <%= @book.pagecount %></p>
           <p class="card-text h5">Tradable: <%= @book.tradable %></p>
+
           <% if current_user.id != @book.user.id %>
-              <a href="<%= new_book_offer_path(@book.id)%>" class="btn btn-primary <%= @offer ? 'disabled' : '' %>">
-                Create Offer
-              </a>  
-            <% if @offer && @offer.waiting? %>
-              <div class="alert alert-info mt-3">
-                <% if @offer.recomemded_book.id == @book.id %>
-                  <strong><%= @offer.recomemded_book.title %></strong> was offered to 
-                    <strong><%= @offer.book.title %></strong>.
-                     [<strong><%= @offer.recomemded_book.user.username %></strong>]
-                <% else %>
-                  <strong><%= @offer.recomemded_book.title %></strong> was offered for this book. 
-                  [<strong><%= @offer.recomemded_book.user.username %></strong>]
-                <% end %>
-              </div>
+            <% if !@offer.present? %>
+              <%= link_to 'Create Offer', new_book_offer_path(@book), :class => 'btn btn-primary' %>
             <% end %>
           <% else %>
             <%= link_to 'Edit', edit_book_path(@book), :class => 'btn btn-info' %>
           <% end %>
+
+          <% if @offer.present? %>
+            <div class="alert alert-info mt-3">
+              <strong><%= @offer.recomemded_book.title %></strong> was offered to
+              <strong><%= @offer.book.title %></strong>.
+              [<strong><%= @offer.recomemded_book.user.username %></strong>]
+            </div>
+          <% end %>
         </div>
+
         <div class="card-footer text-muted">
           Upload Date <%= @book.created_at.strftime("%d/%m/%Y") %>
         </div>
