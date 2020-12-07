@@ -1,19 +1,19 @@
 <% if @incoming_offers.size > 0 %>
   <% @incoming_offers.each do |offer| %>
-    <% if offer.status != 'rejected' %> 
+    <% if offer.status != 'rejected' %>
     <div class="alert <%= offer.status == 'approved' ? 'alert-success' : 'alert-warning' %>" role="alert">
       You have an offer for <strong><a href="<%=book_path(offer.book.id)%>"><%= offer.book.title %></a></strong> book.
         <span class="badge badge-pill badge-info float-right">
           <%= offer.status %>
         </span>
         <% if offer.status != 'approved' %>
-          <%= link_to 'Click here', edit_book_offer_path(offer.book_id, offer.id)%> to answer it. 
-        <% end %>     
+          <%= link_to 'Click here', edit_book_offer_path(offer.book_id, offer.id)%> to answer it.
+        <% end %>
     </div>
     <% else %>
-      <div class="alert <%= offer.status == 'approved' ? 'alert-success' : 'alert-warning' %>" role="alert">
+      <div class="alert alert-danger" role="alert">
         You have an offer for <strong><a href="<%=book_path(offer.book.id)%>"><%= offer.book.title %></a></strong> book.
-        <a href="<%=user_path(offer.user.id)%>">[<%=offer.user.username%>]</a>
+        <a href="<%=user_path(offer.recomemded_book.user.id)%>">[<%= offer.recomemded_book.user.username %>]</a>
             <span class="badge badge-pill badge-danger float-right">
               <%= offer.status %>
             </span>
