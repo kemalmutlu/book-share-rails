@@ -54,3 +54,8 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Add Authentication with device 
 gem 'devise'
+# datatable
+gem 'ajax-datatables-rails'
+# jqyery data tables
+gem 'jquery-datatables'
+
