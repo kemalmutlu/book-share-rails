@@ -10,17 +10,28 @@
             </span>
           </a>
         </div>
+
         <div class="card-body">
           <h5 class="card-title">Author: <%= @book.author.split(' ').map(&:capitalize).join(" ") %></h5>
           <p class="card-text h5">Page Count: <%= @book.pagecount %></p>
           <p class="card-text h5">Tradable: <%= @book.tradable %></p>
 
+          <p class="card-text h5">Categories:</p>
+
+          <div>
+            <% @book.categories.each do |category| %>
+                  <span class="badge badge-dark">
+                       <%= category.name %>
+                  </span>
+            <% end %>
+          </div>
+
           <% if current_user.id != @book.user.id %>
             <% if !@offer.present? %>
-              <%= link_to 'Create Offer', new_book_offer_path(@book), :class => 'btn btn-primary' %>
+              <%= link_to 'Create Offer', new_book_offer_path(@book), :class => 'btn btn-primary mt-3' %>
             <% end %>
           <% else %>
-            <%= link_to 'Edit', edit_book_path(@book), :class => 'btn btn-info' %>
+            <%= link_to 'Edit', edit_book_path(@book), :class => 'btn btn-info mt-3' %>
           <% end %>
 
           <% if @offer.present? %>
@@ -33,7 +44,7 @@
         </div>
 
         <div class="card-footer text-muted">
-          Upload Date <%= @book.created_at.strftime("%d/%m/%Y") %>
+            Upload Date <%= @book.created_at.strftime("%d/%m/%Y") %>
         </div>
       </div>
       
