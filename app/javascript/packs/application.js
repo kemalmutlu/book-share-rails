@@ -8,6 +8,7 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require('datatables.net-bs4')
+require("jquery")
 
 import "bootstrap"
 
@@ -18,7 +19,16 @@ import $ from 'jquery';
 global.$ = jQuery;
 
 
+$(document).ready(function(){
+    let table = $('#books').DataTable();
 
+    $('#books_wrapper .form-control').on( 'keyup', function () {
+        table
+            .columns( 0 )
+            .search( this.value )
+            .draw();
+    } );
+})
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.

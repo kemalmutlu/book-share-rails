@@ -48,14 +48,5 @@
 </div>
 
 <script>
-    $(document).ready(function(){
-        let table = $('#books').DataTable();
 
-        $('#books_wrapper .form-control').on( 'keyup', function () {
-            table
-                .columns( 0 )
-                .search( this.value )
-                .draw();
-        } );
-   })
 </script>
