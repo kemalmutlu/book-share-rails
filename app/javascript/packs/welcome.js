@@ -6,13 +6,20 @@ window.$ = window.jQuery = jQuery;
 import $ from 'jquery';
 global.$ = jQuery;
 
-$(document).ready(function(){
-    let table = $('#books').DataTable();
 
+let table = $('#books').DataTable();
+
+document.addEventListener("turbolinks:load", function() {
     $('#books_wrapper .form-control').on( 'keyup', function () {
         table
             .columns( 0 )
             .search( this.value )
             .draw();
     } );
+})
+
+document.addEventListener("turbolinks:before-cache", function() {
+    if (table !== null) {
+        table.destroy();
+    }
 })

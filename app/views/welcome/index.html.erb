@@ -46,3 +46,8 @@
       </table>
   <% end %>
 </div>
+
+<% content_for :js do %>
+  <%= javascript_pack_tag 'welcome', 'data-turbolinks-track': 'reload' %>
+<% end %>
+

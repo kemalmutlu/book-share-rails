@@ -60,7 +60,6 @@
   </div>
     <%= yield %>
 
-  <%= javascript_pack_tag 'welcome', 'data-turbolinks-track': 'reload' %>
-
+   <%= yield :js %>
   </body>
 </html>
