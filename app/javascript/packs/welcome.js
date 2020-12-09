@@ -7,7 +7,9 @@ import $ from 'jquery';
 global.$ = jQuery;
 
 
-let table = $('#books').DataTable();
+let table = $('#books').DataTable({
+        "ordering": false
+    });
 
 document.addEventListener("turbolinks:load", function() {
     $('#books_wrapper .form-control').on( 'keyup', function () {
