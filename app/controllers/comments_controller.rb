@@ -17,14 +17,14 @@ class CommentsController < ApplicationController
 
   def edit
     @comment = Comment.find(params[:id])
-    @book = Book.find(params[:book_id]) 
+    @book = Book.find(params[:book_id])
   end 
 
   def update 
-    @comment = Comment.find(params[:id]) 
-    
+    @comment = Comment.find(params[:id])
+
     if @comment.update_attributes(:status => true)
-      redirect_to dashboard_index_url
+      redirect_to dashboard_index_url, notice: 'Comment status was successfully updated.'
     else
       render 'edit'
     end

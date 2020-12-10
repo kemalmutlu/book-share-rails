@@ -47,7 +47,7 @@
             Upload Date <%= @book.created_at.strftime("%d/%m/%Y") %>
         </div>
       </div>
-      
+
       <div class="card" style="width: 100%;">
         <div class="card-body">
           <h2>Comments</h2>
@@ -60,7 +60,7 @@
           <h2>Add a comment:</h2>
             <%= render 'comments/form' %>
 
-          <%= link_to 'Back', books_path, :class => 'btn btn-warning' %>
+          <%= link_to 'Back', url_for(:back), :class => 'btn btn-warning' %>
         </div>
       </div>
     </div>

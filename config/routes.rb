@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # Welcome Root
   root 'welcome#index'
   # Books Route
-  resources :books do
+  resources :books, :except => [:index] do
     resources :comments
     resources :offers
   end

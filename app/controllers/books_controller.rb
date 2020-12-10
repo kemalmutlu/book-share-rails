@@ -1,10 +1,6 @@
 class BooksController < ApplicationController
   before_action :require_permission, only: [:edit, :update, :destroy]
 
-  def index         
-    redirect_to root_path
-  end
-
   def show
     @book = Book.find(params[:id])
     @offer = Offer.where(book_id: params[:id]).or(Offer.where(recommended_book_id: params[:id])).first
@@ -26,7 +22,7 @@ class BooksController < ApplicationController
     @book.categories << @category
 
     if @book.save
-      redirect_to @book
+      redirect_to @book, notice: 'Book was successfully created.'
     else
       category_collection
       render 'new'
@@ -43,7 +39,7 @@ class BooksController < ApplicationController
     @book.categories << @category
 
     if @book.update(book_params)
-      redirect_to @book
+      redirect_to @book, notice: 'Book was successfully updated.'
     else
       category_collection
       render 'edit'
@@ -54,7 +50,7 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @book.destroy
    
-    redirect_to books_path
+    redirect_to dashboard_index_path, notice: 'Book was successfully destroyed.'
   end
 
   private
