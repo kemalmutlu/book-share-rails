@@ -11,14 +11,12 @@ let table = $('#books').DataTable({
         "ordering": false
     });
 
-document.addEventListener("turbolinks:load", function() {
-    $('#books_wrapper .form-control').on( 'keyup', function () {
-        table
-            .columns( 0 )
-            .search( this.value )
-            .draw();
-    } );
-})
+$('#books_wrapper .form-control').on( 'keyup', function () {
+    table
+        .columns( 0 )
+        .search( this.value )
+        .draw();
+});
 
 document.addEventListener("turbolinks:before-cache", function() {
     if (table !== null) {
