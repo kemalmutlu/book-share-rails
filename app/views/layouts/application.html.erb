@@ -31,17 +31,25 @@
           </li>
           <% end %>
         </ul>
-        <div class="form-inline my-2 my-lg-0">
-          <% if user_signed_in? %>
-        Logged in as <strong class="ml-1"><%= current_user.username %></strong>.
-        <%= link_to 'Dashboard', dashboard_index_url, :class =>  "btn btn-outline-dark mr-1 ml-1" %>
-        <%= link_to 'Edit profile', edit_user_registration_path, :class => 'btn btn-outline-primary mr-1 ml-1' %>
-        <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'btn btn-outline-danger'  %>
+
+        <% if user_signed_in? %>
+        <ul class="navbar-nav my-2 my-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dashboard
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to 'Dashboard', dashboard_index_url, :class =>  "dropdown-item" %>
+              <%= link_to 'Edit profile', edit_user_registration_path, :class => 'dropdown-item' %>
+              <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'dropdown-item'  %>
+            </div>
+          </li>
+
         <% else %>
           <%= link_to "Sign up", new_user_registration_path, :class => 'btn btn-outline-success mr-2'  %>
           <%= link_to "Login", new_user_session_path, :class => 'btn btn-outline-primary'  %>
         <% end %>
-        </div>
+        </ul>
       </div>
     </div>
   </nav>
