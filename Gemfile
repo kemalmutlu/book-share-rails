@@ -58,4 +58,5 @@ gem 'devise'
 gem 'ajax-datatables-rails'
 # jqyery data tables
 gem 'jquery-datatables'
-
+# Component
+gem "elemental_components"

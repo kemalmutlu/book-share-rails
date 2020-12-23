@@ -54,20 +54,15 @@
     </div>
   </nav>
 
-  <div class="container mt-5">
-    <div class="row">
-      <div class="col-md-12">
-        <% if notice %>
-          <p class="alert alert-success"><%= notice %></p>
-        <% end %>
-        <% if alert %>
-          <p class="alert alert-danger"><%= alert %></p>
-        <% end %>
-      </div>
-    </div>
-  </div>
-    <%= yield %>
+<!-- Notice && Alert Message Component -->
+<% if notice %>
+  <%= component "alert", message:  notice, context: "success" %>
+<% elsif alert %>
+  <%= component "alert", message:  alert, context: "danger" %>
+<% end %>
 
-   <%= yield :js %>
+<%= yield %>
+
+<%= yield :js %>
   </body>
 </html>
