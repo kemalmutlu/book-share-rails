@@ -36,11 +36,17 @@
         <ul class="navbar-nav my-2 my-lg-0">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dashboard
+              <%= current_user.username %>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <%= link_to 'Dashboard', dashboard_index_url, :class =>  "dropdown-item" %>
+
+              <%= link_to dashboard_user_books_path, :class => 'dropdown-item' do %>
+                Your Books <span class="badge badge-success"><%= current_user.books.count %></span>
+              <% end  %>
+
               <%= link_to 'Edit profile', edit_user_registration_path, :class => 'dropdown-item' %>
+
               <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'dropdown-item'  %>
             </div>
           </li>

@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   get '/offers', to: 'offers#list'
 
   # Dashboard Route
-  resources :dashboard 
+  get  'dashboard/index', to: 'dashboard#index', as: 'dashboard_index'
+  get 'dashboard/books', to: 'dashboard#books', as: 'dashboard_user_books'
+
   # Users
   resources :users
 end

@@ -39,7 +39,7 @@ class BooksController < ApplicationController
     @book.categories << @category
 
     if @book.update(book_params)
-      redirect_to @book, notice: 'Book was successfully updated.'
+      redirect_to dashboard_user_books_path, notice: 'Book was successfully updated.'
     else
       category_collection
       render 'edit'
@@ -50,7 +50,7 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @book.destroy
    
-    redirect_to dashboard_index_path, notice: 'Book was successfully destroyed.'
+    redirect_to dashboard_user_books_path, notice: 'Book was successfully destroyed.'
   end
 
   private
